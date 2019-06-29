@@ -22,30 +22,4 @@ const send = {
     }
 }
 
-// const successObj = (result) => {
-// 	return {
-// 		'status':1,
-// 		'result': result,
-// 	}
-// }
-
-// const exceptionObj = (message, errorCode = 404) => {
-// 	return {
-// 		'status':0,
-// 		'error': {
-// 			'code': errorCode,
-// 			'message': message,
-// 		},
-// 	}
-// }
-
-// const ResponseExpress = {
-//     successful: (res, result) => {
-//         res.json(successObj(result));
-//     },
-
-//     exception: (res, message, errorCode) => {
-//         res.json(exceptionObj(message, errorCode));
-//     }
-// }
 module.exports = send;

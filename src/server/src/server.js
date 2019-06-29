@@ -1,3 +1,4 @@
+const http = require('http');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors')
@@ -14,7 +15,6 @@ mongoose.connect(Data.MongoURI, { useNewUrlParser: true }, () => {
 //Middle ware
 app.use(cors())
 app.use(express.json());
-
 
 
 require('./models/User');

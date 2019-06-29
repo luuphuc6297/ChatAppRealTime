@@ -10,15 +10,6 @@ const User = mongoose.model('User');
 exports.UserRegister = (req, res, next) => {
     // const { name, email, password, password2, phone } = req.body;
 
-    // if (!name || !email || !password || !password2 || !phone) {
-    //     return send.fail(res, "Please enter all fields");
-    // }
-    // if (password !== password2) {
-    //     return send.fail(res, "Passwords do not match");
-    // }
-    // if (password.length < 6) {
-    //     return send.fail(res, "Password must be at least 6 characters");
-    // }
 
     let missField = Common.checkMissParams(res, req.body, ['name', 'email', 'password', 'password2', 'phone'])
     if (missField) {

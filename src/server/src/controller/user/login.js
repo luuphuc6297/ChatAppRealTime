@@ -7,24 +7,6 @@ const send = require('../../config/send');
 const User = mongoose.model('User');
 
 
-// exports.CheckUserLogin = (req, res, next) => {
-//     const { email, password } = req.body;
-//     if (!email || !password) {
-//         return send.fail(res, "Please enter all fields")
-//     }
-//     if (email) {
-//         User.findOne({ email: email }).then(user => {
-//             if (!user) {
-//                 return send.fail(res, "User dose not exist");
-//             }
-//             ComparePassword.comparePassword (password, user.password, res);
-//             if(!user.password) {
-                
-//             }
-//         });
-//     }
-// }
-
 exports.UserLogin = (req, res) => {
 
     let miss = Common.checkMissParams(res, req.body, ['email', 'password'])
@@ -59,6 +41,7 @@ exports.UserLogin = (req, res) => {
         let accessToken = result[1];
        
         if(!isMatchPassword) {
+            console.log('skjdfhkjghdsfkghekjrhgjehrjgkherjkhg')
             return send.error(res, "Password is not match")
         }
         send.success(res,'Login Successful', {accessToken, id, email})
