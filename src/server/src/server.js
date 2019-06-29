@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+const cors = require('cors')
 //Create global
 const app = express();
 
@@ -12,6 +12,7 @@ mongoose.connect(Data.MongoURI, { useNewUrlParser: true }, () => {
 });
 
 //Middle ware
+app.use(cors())
 app.use(express.json());
 
 

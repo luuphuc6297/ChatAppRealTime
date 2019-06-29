@@ -1,0 +1,72 @@
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
+
+const CheckPassword = require('../../library/password')
+const Common = require('../../library/common');
+const send = require('../../config/send');
+const User = mongoose.model('User');
+
+
+// exports.CheckUserLogin = (req, res, next) => {
+//     const { email, password } = req.body;
+//     if (!email || !password) {
+//         return send.fail(res, "Please enter all fields")
+//     }
+//     if (email) {
+//         User.findOne({ email: email }).then(user => {
+//             if (!user) {
+//                 return send.fail(res, "User dose not exist");
+//             }
+//             ComparePassword.comparePassword (password, user.password, res);
+//             if(!user.password) {
+                
+//             }
+//         });
+//     }
+// }
+
+exports.UserLogin = (req, res) => {
+
+    let miss = Common.checkMissParams(res, req.body, ['email', 'password'])
+    let id;
+    let email;
+
+    if(miss) {
+        console.log("Miss param at Login");
+        return;
+    }
+
+    User.findOne({email: req.body.email})
+    .then(user => {
+        if(!user) {
+            return send.fail(res, "User dose not exist")
+        }
+        id = user._id;
+        email = user.email
+        let tokenPayload = {
+            _id: user._id,
+            email: email
+        }
+        console.log(req.body.password)
+        console.log(user.password)
+        return Promise.all([
+            CheckPassword.comparePassword(req.body.password, user.password),
+            Common.createToken(tokenPayload, "3 days"),
+        ])
+    })
+    .then(result => {
+        let isMatchPassword = result[0];
+        let accessToken = result[1];
+       
+        if(!isMatchPassword) {
+            return send.error(res, "Password is not match")
+        }
+        send.success(res,'Login Successful', {accessToken, id, email})
+        
+    })
+    .catch(err => {
+        send.fail(res, "Some thing wrong" || err);
+        console.log('Login fail' + err);
+    })
+}
+    
