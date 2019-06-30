@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt')
-
-const ComparePassword = require('../../library/password');
-const Common = require('../../library/common');
+const config = require('../../config/security')
+// const ComparePassword = require('../../library/password');
+// const Common = require('../../library/common');
+const ComparePassword = require(config.LibraryDir + '/password');
+const Common = require(config.LibraryDir + '/common');
 const send = require('../../config/send');
 const User = mongoose.model('User');
 
