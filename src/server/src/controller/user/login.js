@@ -28,9 +28,7 @@ exports.UserLogin = (req, res) => {
         let tokenPayload = {
             _id: user._id,
             email: email
-        }
-        console.log(req.body.password)
-        console.log(user.password)
+        } // Truyền 2 thông số _id và email vào token
         return Promise.all([
             CheckPassword.comparePassword(req.body.password, user.password),
             Common.createToken(tokenPayload, "3 days"),
@@ -41,7 +39,6 @@ exports.UserLogin = (req, res) => {
         let accessToken = result[1];
        
         if(!isMatchPassword) {
-            console.log('skjdfhkjghdsfkghekjrhgjehrjgkherjkhg')
             return send.error(res, "Password is not match")
         }
         send.success(res,'Login Successful', {accessToken, id, email})

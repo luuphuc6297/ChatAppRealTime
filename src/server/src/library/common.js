@@ -7,7 +7,7 @@ exports.findMissParams = (obj, checkProps) => {
     if(!Array.isArray(checkProps)) {
         checkProps = [checkProps];
     }
-    obj = JSON.parse(JSON.stringify(obj));
+    obj = JSON.parse(JSON.stringify(obj)); // Parse obj thành JSON
     var missProps = [];
    
     for(var i = 0; i < checkProps.lenght; i ++) {

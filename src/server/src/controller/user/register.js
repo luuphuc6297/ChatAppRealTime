@@ -8,10 +8,8 @@ const User = mongoose.model('User');
 
 
 exports.UserRegister = (req, res, next) => {
-    // const { name, email, password, password2, phone } = req.body;
 
-
-    let missField = Common.checkMissParams(res, req.body, ['name', 'email', 'password', 'password2', 'phone'])
+    let missField = Common.checkMissParams(res, req.body, ['name', 'email', 'password', 'password2', 'phone']) //Check các field truyền vào của user
     if (missField) {
         console.log("Miss param at Create Field");
         return;
